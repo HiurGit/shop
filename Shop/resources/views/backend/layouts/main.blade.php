@@ -94,10 +94,16 @@
 <!-- FastClick -->
 <script src="{{ asset('public/backend')}}/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('backend')}}/dist/js/adminlte.min.js"></script>
+<script src="{{ asset('public/backend')}}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('public/backend')}}/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('public/backend')}}/dist/js/demo.js"></script>
+<script src="//cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+<script>
+    // Replace the <textarea id="editor1"> with a CKEditor 4
+    // instance, using default configuration.
+    CKEDITOR.replace( 'editor1' );
+</script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +20,5 @@ Route::get('/', function () {
     return view('frontend.client.home');
 });
 Route::get('/admin', [AdminController::class, 'dashboard']);
+Route::resource('product', ProductController::class);
+Route::resource('banner', BannerController::class);
