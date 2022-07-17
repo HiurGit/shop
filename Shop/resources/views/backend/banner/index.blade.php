@@ -15,12 +15,11 @@
                 <th>Hình ảnh</th>
                 <th>Tên</th>
                 <th>Loại</th>
+                <th>Hiển thị</th>
                 <th>Hành động</th>
               </tr>
               @foreach ($data as $key => $item )]
-@php
 
-@endphp
               <tr>
                 <td>{{ $key + 1 }} </td>
                 <td>
@@ -35,8 +34,35 @@
                 </td>
 
                 <td>{{ $item->title }}</td>
-                <td><span class="badge bg-red">100%</span></td>
-                <td>Hành động</td>
+                <td>
+                        @if ($item->type==1)
+                        Banner trang chủ
+                        @elseif ($item->type==2)
+                        Banner quảng cáo trái
+                        @elseif ($item->type==3)
+                        Banner quảng cáo phải
+                        @elseif ($item->type==4)
+                        Background
+                        @else
+                        None
+                        @endif
+
+                </td>
+                <td>
+                    <span class="badge bg-red">
+                        @if ($item->is_active==1)
+                        Hiện
+                        @elseif ($item->is_active==0)
+                        Ẩn
+                        @else
+                        None
+                        @endif
+                    </span>
+                </td>
+                <td>
+                    <a href="{{ route('banner.edit',['banner' => $item->id])}}"  type="button" class="btn btn-info"><i class="fa fa-pencil-square-o" > Edit</i></a>
+                    <a href="" type="button" class="btn btn-danger"><i class="fa fa-trash-o"> Delete</i></a>
+            </td>
               </tr>
               @endforeach
 

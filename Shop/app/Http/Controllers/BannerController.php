@@ -96,7 +96,7 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = Bannẻ
     }
 
     /**

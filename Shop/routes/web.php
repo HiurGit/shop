@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('frontend.client.home');
 });
-Route::get('/admin', [AdminController::class, 'dashboard']);
-Route::resource('product', ProductController::class);
-Route::resource('banner', BannerController::class);
+
+Route::prefix('admin')->group(function () {
+
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin');
+    Route::resource('product', ProductController::class);
+    Route::resource('banner', BannerController::class);
+
+});
