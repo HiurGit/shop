@@ -20,7 +20,7 @@
               </tr>
               @foreach ($data as $key => $item )]
 
-              <tr>
+              <tr class="item-{{ $item->id }}">
                 <td>{{ $key + 1 }} </td>
                 <td>
                     @if ( file_exists($item->image))
@@ -61,7 +61,7 @@
                 </td>
                 <td>
                     <a href="{{ route('banner.edit',['banner' => $item->id])}}"  type="button" class="btn btn-info"><i class="fa fa-pencil-square-o" > Edit</i></a>
-                    <a href="" type="button" class="btn btn-danger"><i class="fa fa-trash-o"> Delete</i></a>
+                    <span href=""  data-id="{{ $item->id }}" type="button" class="btn btn-danger deleteItem"><i class="fa fa-trash-o"> Delete</i></span>
             </td>
               </tr>
               @endforeach
@@ -86,4 +86,25 @@
     </div>
 </section>
 
+@endsection
+
+@section('js')
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            $('.deleteItem').click(function () {
+                var id = $(this).attr('data-id');
+                var me = $(this);
+                        $.ajax({
+                            url : 'banner/'+id,
+                            type: 'DELETE',
+                            data: {},
+                            success: function (res) {
+                                $('.item-'+id).remove();
+                            },
+                            error: function (res) {
+                            }
+                        });
+            });
+        });
+    </script>
 @endsection

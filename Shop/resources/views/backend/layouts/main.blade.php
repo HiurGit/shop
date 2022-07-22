@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Dashboard</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -49,6 +50,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     @yield('content')
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -101,6 +103,16 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('public/backend')}}/dist/js/demo.js"></script>
 <script src="//cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+<script src="{{ asset('public/backend')}}/notify.min.js"></script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+        }
+    })
+</script>
+@yield('js')
+
 <script>
     // Replace the <textarea id="editor1"> with a CKEditor 4
     // instance, using default configuration.

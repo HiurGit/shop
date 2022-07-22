@@ -8,7 +8,22 @@
         <li class="active">General Elements</li>
     </ol>
 </section>
-
+<section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-warning"></i> Lỗi !</h4>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        </div>
 <section class="content">
     <div class="row">
         <!-- left column -->
@@ -26,7 +41,7 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tiêu đề</label>
-                            <input required id="title" name="title" type="text" class="form-control" placeholder="">
+                            <input  id="title" name="title" type="text" class="form-control" placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Chọn ảnh</label>
@@ -44,8 +59,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Mô tả</label>
-                            <textarea id="editor1" name="editor1" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                            <label id="label-desc">Mô tả</label>
+                            <textarea id="editor1 description" name="editor1" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                         </div>
                         <div class="form-group">
                             <label>Loại</label>
@@ -68,7 +83,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <button type="submit" class="btn btn-primary btnCreate">Thêm</button>
                     </div>
                 </form>
             </div>
@@ -79,4 +94,26 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
+@endsection
+
+
+
+@section('js')
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            CKEDITOR.replace( 'description' );
+            $('.btnCreate').click(function () {
+                if ($('#title').val() === '') {
+                    $('#title').notify('Bạn nhập chưa nhập tiêu đề','error');
+                    document.getElementById('title').scrollIntoView();
+                    return false;
+                }
+                if ($('#description').val() === '') {
+                    $('#label-desc').notify('Bạn nhập chưa nhập mô tả','error');
+                    document.getElementById('label-desc').scrollIntoView();
+                    return false;
+                }
+            });
+        });
+    </script>
 @endsection
