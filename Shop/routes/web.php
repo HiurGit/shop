@@ -5,6 +5,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +30,6 @@ Route::prefix('admin')->group(function () {
     Route::resource('banner', BannerController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('article', ArticleController::class);
+    Route::resource('setting', SettingController::class);
 
 });
