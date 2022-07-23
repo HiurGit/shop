@@ -88,22 +88,37 @@
 
 @endsection
 
+
 @section('js')
     <script type="text/javascript">
         $( document ).ready(function() {
+
             $('.deleteItem').click(function () {
                 var id = $(this).attr('data-id');
-                var me = $(this);
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
                         $.ajax({
                             url : 'banner/'+id,
                             type: 'DELETE',
                             data: {},
                             success: function (res) {
-                                $('.item-'+id).remove();
+                                if(res.status) {
+                                    $('.item-'+id).remove();
+                                }
                             },
                             error: function (res) {
                             }
                         });
+                    }
+                });
             });
         });
     </script>

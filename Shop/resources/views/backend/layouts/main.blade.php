@@ -103,6 +103,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('public/backend')}}/dist/js/demo.js"></script>
 <script src="//cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('public/backend')}}/notify.min.js"></script>
 <script type="text/javascript">
     $.ajaxSetup({
@@ -116,7 +117,7 @@
 <script>
     // Replace the <textarea id="editor1"> with a CKEditor 4
     // instance, using default configuration.
-    CKEDITOR.replace( 'editor1' );
+
 </script>
 </body>
 </html>

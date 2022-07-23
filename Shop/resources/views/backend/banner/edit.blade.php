@@ -52,8 +52,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Mô tả</label>
-                            <textarea id="editor1" name="editor1" class="form-control" rows="3" placeholder="Enter ..." >{{$model->description}}</textarea>
+                            <label  id="label-desc">Mô tả</label>
+                            <textarea id="editor1 description" name="editor1" class="form-control" rows="3" placeholder="Enter ..." >{{$model->description}}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Loại</label>
@@ -77,7 +77,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary btnUpdate">Update</button>
                     </div>
                 </form>
             </div>
@@ -88,4 +88,28 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
+@endsection
+
+
+
+@section('js')
+
+    <script type="text/javascript">
+        CKEDITOR.replace( 'editor1' );
+        $( document ).ready(function() {
+            CKEDITOR.replace( 'description' );
+            $('.btnUpdate').click(function () {
+                if ($('#title').val() === '') {
+                    $('#title').notify('Bạn nhập chưa nhập tiêu đề','error');
+                    document.getElementById('title').scrollIntoView();
+                    return false;
+                }
+                if ($('#description').val() === '') {
+                    $('#label-desc').notify('Bạn nhập chưa nhập mô tả','error');
+                    document.getElementById('label-desc').scrollIntoView();
+                    return false;
+                }
+            });
+        });
+    </script>
 @endsection

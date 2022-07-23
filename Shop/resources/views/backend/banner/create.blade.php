@@ -99,9 +99,12 @@
 
 
 @section('js')
+
     <script type="text/javascript">
+
         $( document ).ready(function() {
-            CKEDITOR.replace( 'description' );
+            CKEDITOR.replace( 'editor1' );
+
             $('.btnCreate').click(function () {
                 if ($('#title').val() === '') {
                     $('#title').notify('Bạn nhập chưa nhập tiêu đề','error');

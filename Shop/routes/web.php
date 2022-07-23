@@ -25,5 +25,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin');
     Route::resource('product', ProductController::class);
     Route::resource('banner', BannerController::class);
+    Route::resource('category', CategoryController::class);
 
 });

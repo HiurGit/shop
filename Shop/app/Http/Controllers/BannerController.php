@@ -41,18 +41,7 @@ class BannerController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'title' => 'required|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
-            'target' => 'required',
-            'description' => 'required',
-        ],[
-            'title.required' => 'Bạn cần phải nhập vào tiêu đề',
-            'image.required' => 'Bạn chưa chọn file ảnh',
-            'image.image' => 'File ảnh phải có dạng jpeg,png,jpg,gif,svg',
-            'target.required' => 'Bạn cần phải target',
-            'description.required' => 'Bạn cần phải nhập vào mô tả',
-        ]);
+
 
         $banner = new Banner();
         $banner->title = $request->input('title');
@@ -111,6 +100,7 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
+
         $model = Banner::findOrFail($id);
         return view('backend.banner.edit', ['model' => $model]);
     }
@@ -125,18 +115,7 @@ class BannerController extends Controller
     public function update(Request $request, $id)
     {
 
-        $request->validate([
-            'title' => 'required|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
-            'target' => 'required',
-            'description' => 'required',
-        ],[
-            'title.required' => 'Bạn cần phải nhập vào tiêu đề',
-            'image.required' => 'Bạn chưa chọn file ảnh',
-            'image.image' => 'File ảnh phải có dạng jpeg,png,jpg,gif,svg',
-            'target.required' => 'Bạn cần phải target',
-            'description.required' => 'Bạn cần phải nhập vào mô tả',
-        ]);
+
 
         $banner = Banner::findOrFail($id);
         $banner->title = $request->input('title');
@@ -191,6 +170,16 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
+
+        $banner = Banner::findOrFail($id);
+        // xóa ảnh cũ
+        @unlink(public_path($banner->image));
+
         Banner::destroy($id);
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Xóa thành công'
+        ]);
     }
 }
