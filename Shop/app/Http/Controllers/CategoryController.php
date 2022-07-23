@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class CategoryController extends Controller
 {
@@ -130,9 +132,9 @@ class CategoryController extends Controller
 
 
         $category = category::findOrFail($id);
-        $category->title = $request->input('title');
-        $category->slug = Str::slug($request->input('title'));
-        $category->url = $request->input('url');
+        $category->name = $request->input('name');
+        $category->slug = Str::slug($request->input('name'));
+
 
         // @(app_path($category->image));
         $category->image = $request->input('image');
@@ -152,9 +154,7 @@ class CategoryController extends Controller
 
         }
 
-        $category->target = $request->input('target');
-        $category->description = $request->input('editor1');
-        $category->type = $request->input('type');
+        $category->parent_id = $request->input('parent_id');
 
 
         $position = 0;

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banner;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Article;
+use App\Models\Banner;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
-class BannerController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +18,9 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $data = Banner::all();
-        return view('backend.banner.index', ['data' => $data]);
+        $data = Article::all();
+        $dataCate = Category::all();
+        return view('backend.article.index', ['data' => $data], ['dataCate' => $dataCate]);
 
 
     }
@@ -29,7 +32,10 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('backend.banner.create');
+        $data = article::all();
+        $dataCate = Category::all();
+        return view('backend.article.create',  ['data' => $data], ['dataCate' => $dataCate]);
+
     }
 
     /**
@@ -43,42 +49,46 @@ class BannerController extends Controller
 
 
 
-        $banner = new Banner();
-        $banner->title = $request->input('title');
-        $banner->slug = Str::slug($request->input('title'));
-        $banner->url = $request->input('url');
+        $article = new article();
+        $article->title = $request->input('title');
+        $article->url = $request->input('url');
 
-        $banner->image = $request->input('image');
+        $article->slug = Str::slug($request->input('title'));
+
+
+        $article->image = $request->input('image');
         if($request->hasFile('image')){
             $file = $request->file('image');
             $random = Str::random(5);
             $filename= $random.'_'.time().'_'.$file->getClientOriginalName();
-            $path_upload= 'public/upload/banner/';
+            $path_upload= 'public/upload/article/';
             $file->move($path_upload,$filename);
-            $banner->image = $path_upload.$filename;
+            $article->image = $path_upload.$filename;
 
         }
 
-        $banner->target = $request->input('target');
-        $banner->description = $request->input('description');
-        $banner->type = $request->input('type');
+        $article->category_id = $request->input('category_id');
+        $article->summary = $request->input('summary');
+        $article->description = $request->input('description');
+        $article->meta_title = $request->input('meta_title');
+        $article->meta_description = $request->input('meta_description');
 
 
         $position = 0;
         if($request->has('position')){
             $position = $request->input('position');
         }
-        $banner->position =  $position;
+        $article->position =  $position;
 
         $is_active = 0;
         if($request->has('is_active')){
             $is_active = $request->input('is_active');
         }
-        $banner->is_active = $is_active;
+        $article->is_active = $is_active;
 
 
-        $banner->save();
-        return redirect()->route('banner.index');
+        $article->save();
+        return redirect()->route('article.index');
     }
 
     /**
@@ -100,9 +110,18 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
+        $data = Article::all();
+        $dataCate = Category::all();
+        $dataCateFail = Category::findOrFail($id);
+        $model = Article::findOrFail($id);
 
-        $model = Banner::findOrFail($id);
-        return view('backend.banner.edit', ['model' => $model]);
+
+        return view('backend.article.edit', [
+            'model' => $model,
+            'data' => $data,
+            'dataCate' => $dataCate,
+            'dataCateFail'=>$dataCateFail
+        ]);
     }
 
     /**
@@ -117,49 +136,50 @@ class BannerController extends Controller
 
 
 
-        $banner = Banner::findOrFail($id);
-        $banner->title = $request->input('title');
-        $banner->slug = Str::slug($request->input('title'));
-        $banner->url = $request->input('url');
+        $article = article::findOrFail($id);
+        $article->title = $request->input('title');
+        $article->url = $request->input('url');
 
-        // @(app_path($banner->image));
-        $banner->image = $request->input('image');
+        // @(app_path($article->image));
+        $article->image = $request->input('image');
         if($request->hasFile('image'))
         {
 
 
-            @unlink(public_path($banner->image));
+            @unlink(public_path($article->image));
 
 
             $file = $request->file('image');
             $random = Str::random(5);
             $filename= $random.'_'.time().'_'.$file->getClientOriginalName();
-            $path_upload= 'public/upload/banner/';
+            $path_upload= 'public/upload/article/';
             $file->move($path_upload,$filename);
-            $banner->image = $path_upload.$filename;
+            $article->image = $path_upload.$filename;
 
         }
 
-        $banner->target = $request->input('target');
-        $banner->description = $request->input('editor1');
-        $banner->type = $request->input('type');
+        $article->category_id = $request->input('category_id');
+        $article->summary = $request->input('summary');
+        $article->description = $request->input('description');
+        $article->meta_title = $request->input('meta_title');
+        $article->meta_description = $request->input('meta_description');
 
 
         $position = 0;
         if($request->has('position')){
             $position = $request->input('position');
         }
-        $banner->position =  $position;
+        $article->position =  $position;
 
         $is_active = 0;
         if($request->has('is_active')){
             $is_active = $request->input('is_active');
         }
-        $banner->is_active = $is_active;
+        $article->is_active = $is_active;
 
 
-        $banner->save();
-        return redirect()->route('banner.index');
+        $article->save();
+        return redirect()->route('article.index');
     }
 
     /**
@@ -170,12 +190,12 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-      
-        $banner = Banner::findOrFail($id);
-        // xóa ảnh cũ
-        @unlink(public_path($banner->image));
 
-        Banner::destroy($id);
+        $article = article::findOrFail($id);
+        // xóa ảnh cũ
+        @unlink(public_path($article->image));
+
+        article::destroy($id);
 
         return response()->json([
             'status' => true,
