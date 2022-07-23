@@ -40,6 +40,21 @@
 
           </ul>
         </li>
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>CATEGORY</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('category.create') }}"><i class="fa fa-circle-o"></i> Tạo Category</a></li>
+            <li><a href="{{ route('category.index') }}"><i class="fa fa-circle-o"></i> Danh sách Category</a></li>
+
+
+          </ul>
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>

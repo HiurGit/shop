@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,7 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data = category::all();
+        return view('backend.category.index', ['data' => $data]);
+
+
     }
 
     /**
@@ -23,7 +27,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $data = category::all();
+        return view('backend.category.create', ['data' => $data]);
+
     }
 
     /**
@@ -34,7 +40,57 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name' => 'required|max:255',
+            'slug' => 'required|max:255',
+            'position' => 'required|max:255',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+            //'target' => 'required',
+            //'description' => 'required',
+        ],[
+            'name.required' => 'Bạn cần phải nhập vào tên',
+            'slug.required' => 'Bạn cần phải nhập vào Liên kết',
+            'image.image' => 'File ảnh phải có dạng jpeg,png,jpg,gif,svg',
+            'position.required' => 'Bạn cần phải nhập vị trí',
+            //'target.required' => 'Bạn cần phải target',
+            //'description.required' => 'Bạn cần phải nhập vào mô tả',
+        ]);
+
+        $category = new Category();
+        $category->name = $request->input('name');
+        $category->slug = Str::slug($request->input('name'));
+
+
+        $category->image = $request->input('image');
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $random = Str::random(5);
+            $filename= $random.'_'.time().'_'.$file->getClientOriginalName();
+            $path_upload= 'public/upload/category/';
+            $file->move($path_upload,$filename);
+            $category->image = $path_upload.$filename;
+
+        }
+
+        $category->parent_id = $request->input('parent_id');
+
+
+        $position = 0;
+        if($request->has('position')){
+            $position = $request->input('position');
+        }
+        $category->position =  $position;
+
+        $is_active = 0;
+        if($request->has('is_active')){
+            $is_active = $request->input('is_active');
+        }
+        $category->is_active = $is_active;
+
+
+        $category->save();
+        return redirect()->route('category.index');
     }
 
     /**
@@ -45,7 +101,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -56,7 +112,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = category::all();
+        $model = category::findOrFail($id);
+        return view('backend.category.edit', ['model' => $model],['data' => $data]);
     }
 
     /**
@@ -68,7 +126,52 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+
+
+        $category = category::findOrFail($id);
+        $category->title = $request->input('title');
+        $category->slug = Str::slug($request->input('title'));
+        $category->url = $request->input('url');
+
+        // @(app_path($category->image));
+        $category->image = $request->input('image');
+        if($request->hasFile('image'))
+        {
+
+
+            @unlink(public_path($category->image));
+
+
+            $file = $request->file('image');
+            $random = Str::random(5);
+            $filename= $random.'_'.time().'_'.$file->getClientOriginalName();
+            $path_upload= 'public/upload/category/';
+            $file->move($path_upload,$filename);
+            $category->image = $path_upload.$filename;
+
+        }
+
+        $category->target = $request->input('target');
+        $category->description = $request->input('editor1');
+        $category->type = $request->input('type');
+
+
+        $position = 0;
+        if($request->has('position')){
+            $position = $request->input('position');
+        }
+        $category->position =  $position;
+
+        $is_active = 0;
+        if($request->has('is_active')){
+            $is_active = $request->input('is_active');
+        }
+        $category->is_active = $is_active;
+
+
+        $category->save();
+        return redirect()->route('category.index');
     }
 
     /**
@@ -79,6 +182,16 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $category = category::findOrFail($id);
+        // xóa ảnh cũ
+        @unlink(public_path($category->image));
+
+        category::destroy($id);
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Xóa thành công'
+        ]);
     }
 }
