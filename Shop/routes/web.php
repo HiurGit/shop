@@ -6,6 +6,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UsersController;
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,13 +26,16 @@ Route::get('/', function () {
     return view('frontend.client.home');
 });
 
-Route::prefix('admin')->group(function () {
+Route::get('/admin/login', [AdminController::class,'login']);
 
+Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin');
+
     Route::resource('product', ProductController::class);
     Route::resource('banner', BannerController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('article', ArticleController::class);
     Route::resource('setting', SettingController::class);
+    Route::resource('users', UsersController::class);
 
 });

@@ -27,58 +27,73 @@
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
           <a href="#">
+            <i class="fa  fa-user-circle-o"></i>
+            <span>Quản lý USER</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('users.create') }}"><i class="fa fa-plus-square"></i>Tạo User</a></li>
+            <li><a href="{{ route('users.index') }}"><i class="fa fa-list"></i> Danh sách Users</a></li>
+
+
+          </ul>
+        </li>
+        <li class=" treeview">
+          <a href="#">
             <i class="fa fa-file-photo-o"></i>
-            <span>BANNER</span>
+            <span>Quản lý BANNER</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('banner.create') }}"><i class="fa fa-plus-square"></i> Tạo Banner</a></li>
-            <li><a href="{{ route('banner.index') }}"><i class="fa fa-chevron-circle-right"></i> Danh sách Banner</a></li>
+            <li><a href="{{ route('banner.index') }}"><i class="fa fa-list"></i> Danh sách Banner</a></li>
 
 
           </ul>
         </li>
-        <li class="active treeview">
+        <li class=" treeview">
           <a href="#">
             <i class="fa fa-th-large"></i>
-            <span>CATEGORY</span>
+            <span>Quản lý CATEGORY</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('category.create') }}"><i class="fa fa-plus-square"></i> Tạo Category</a></li>
-            <li><a href="{{ route('category.index') }}"><i class="fa fa-chevron-circle-right"></i> Danh sách Category</a></li>
+            <li><a href="{{ route('category.index') }}"><i class="fa fa-list"></i> Danh sách Category</a></li>
           </ul>
         </li>
-        <li class="active treeview">
+        <li class=" treeview">
             <a href="#">
               <i class="fa fa-list-alt"></i>
-              <span>ARTICLES</span>
+              <span>Quản lý ARTICLES</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
               <li><a href="{{ route('article.create') }}"><i class="fa fa-plus-square"></i> Tạo Article</a></li>
-              <li><a href="{{ route('article.index') }}"><i class="fa fa-chevron-circle-right"></i> Danh sách Article</a></li>
+              <li><a href="{{ route('article.index') }}"><i class="fa fa-list"></i> Danh sách Article</a></li>
 
 
             </ul>
           </li>
-          <li class="active treeview">
+          <li class=" treeview">
             <a href="#">
               <i class="fa fa-wrench"></i>
-              <span>SETTING</span>
+              <span>Quản lý SETTING</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
               <li><a href="{{ route('setting.create') }}"><i class="fa fa-plus-square"></i> Tạo SETTING</a></li>
-              <li><a href="{{ route('setting.index') }}"><i class="fa fa-chevron-circle-right"></i> Danh sách SETTING</a></li>
+              <li><a href="{{ route('setting.index') }}"><i class="fa fa-list"></i> Danh sách SETTING</a></li>
             </ul>
           </li>
 
