@@ -5,21 +5,35 @@
       <div class="col-md-12">
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">Danh Sách brand</h3>
+            <h3 class="box-title">Danh Sách sản phẩm</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <table class="table table-bordered">
+            <table class="table table-bordered myTable" id="myTable">
+            <thead>
               <tr>
                 <th style="width: 10px">STT</th>
                 <th>Hình ảnh</th>
                 <th>Tên</th>
-                <th>Website</th>
-                <th>Sắp xếp </th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th>Giá sale</th>
+                <th>Liên kết</th>
+                <th>Color</th>
+                <th>Tóm tắt</th>
+                <th>Danh mục</th>
+                <th>Cung cấp</th>
+                <th>Nhãn hiệu</th>
+                <th>Mô tả</th>
+                <th>meta_title</th>
+                <th>meta_description</th>
+                <th>Vị trí</th>
+                <th>Is Hot</th>
                 <th>Trạng thái </th>
-
                 <th>Hành động</th>
               </tr>
+              </thead>
+              <tbody>
               @foreach ($data as $key => $item )]
 
               <tr class="item-{{ $item->id }}">
@@ -30,14 +44,34 @@
                     @else
                     <img src="  {{ asset('public/upload/404.jpg' )}}" width="200" height="150" alt="">
                     @endif
-
-
-
                 </td>
 
                 <td>{{ $item->name }}</td>
-                <td>{{ $item->website }}</td>
+                <td>{{ $item->stock }}</td>
+                <td>{{ $item->price }}</td>
+                <td>{{ $item->sale }}</td>
+                <td>{{ $item->url }}</td>
+                <td>{{ $item->color }}</td>
+                <td>{{ $item->summary }}</td>
+                <td>{{ $item->category_id }}</td>
+                <td>{{ $item->vendor_id }}</td>
+                <td>{{ $item->brand_id }}</td>
+                <td >{{ $item->description }}</td>
+                <td>{{ $item->meta_title }}</td>
+                <td>{{ $item->meta_description }}</td>
                 <td>{{ $item->position }}</td>
+
+                <td>
+                    <span class="badge bg-red">
+                        @if ($item->is_hot==1)
+                        Hiện
+                        @elseif ($item->is_hot==0)
+                        Ẩn
+                        @else
+                        None
+                        @endif
+                    </span>
+                </td>
                 <td>
                     <span class="badge bg-red">
                         @if ($item->is_active==1)
@@ -56,32 +90,34 @@
               </tr>
               @endforeach
 
-
+              </tbody>
 
 
             </table>
           </div>
           <!-- /.box-body -->
-          <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
-          </div>
+
         </div>
       </div>
     </div>
+
+
+
 </section>
 
 @endsection
 
 
 @section('js')
+    <script>
+        $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+    </script>
+
     <script type="text/javascript">
         $( document ).ready(function() {
+
 
             $('.deleteItem').click(function () {
                 var id = $(this).attr('data-id');
@@ -111,5 +147,5 @@
                 });
             });
         });
-    </script>
+    </>
 @endsection

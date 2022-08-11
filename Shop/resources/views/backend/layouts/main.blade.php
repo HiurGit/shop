@@ -29,6 +29,7 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{ asset('public/backend')}}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -100,10 +101,13 @@
 <script src="{{ asset('public/backend')}}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('public/backend')}}/dist/js/pages/dashboard.js"></script>
+
+
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('public/backend')}}/dist/js/demo.js"></script>
 <script src="//cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('public/backend')}}/notify.min.js"></script>
 <script type="text/javascript">
     $.ajaxSetup({
@@ -112,6 +116,8 @@
         }
     })
 </script>
+
+
 @yield('js')
 
 <script>

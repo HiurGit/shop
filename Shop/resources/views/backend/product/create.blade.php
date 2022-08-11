@@ -70,6 +70,14 @@
                                     <input type="text" class="form-control" id="url" name="url" placeholder="">
                                 </div>
                                 <div class="form-group">
+                                    <label for="url">Color</label>
+                                    <input type="text" class="form-control" id="color" name="color" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="url">Tóm tắt</label>
+                                    <input type="text" class="form-control" id="summary" name="summary" placeholder="">
+                                </div>
+                                <div class="form-group">
                                     <label for="category_id">Danh mục sản phẩm (*): </label>
                                     <select id="category_id" name="category_id" class="form-control">
                                         <option value="0">-- Chọn Danh Mục --</option>
@@ -100,9 +108,26 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label id="label-desc">Mô tả</label>
+                                    <textarea id="description" name="description" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="url">meta_title </label>
+                                    <textarea type="text" class="form-control" id="meta_title" name="meta_title" placeholder=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="url">meta_description</label>
+                                    <textarea type="text" class="form-control" id="meta_description" name="meta_description" placeholder=""></textarea>
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleInputPassword1">Vị trí</label>
-                                    <input min="0" type="number" class="form-control" id="position" name="position"
-                                        placeholder="">
+                                    <input min="0" type="number" class="form-control" id="position"
+                                        name="position" placeholder="">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input value="1" type="checkbox" name="is_hot" id="is_hot"> Is Hot
+                                    </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
@@ -130,8 +155,20 @@
     @section('js')
         <script type="text/javascript">
             $(document).ready(function() {
+                CKEDITOR.replace( 'description' );
 
-
+                $('#price').on('keyup',function(e) {
+                    var price = $(this).val();
+                    price = parseInt(price.replaceAll(',',''));
+                    price = new Intl.NumberFormat('ja-JP').format(price);
+                    $(this).val(price);
+                });
+                $('#sale').on('keyup',function(e) {
+                    var sale = $(this).val();
+                    sale = parseInt(sale.replaceAll(',',''));
+                    sale = new Intl.NumberFormat('ja-JP').format(sale);
+                    $(this).val(sale);
+                });
                 $('.btnCreate').click(function() {
                     if ($('#name').val() === '') {
                         $('#name').notify('Bạn nhập chưa nhập tiêu đề', 'error');

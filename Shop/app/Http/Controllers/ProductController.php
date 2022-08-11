@@ -56,6 +56,7 @@ class ProductController extends Controller
 
 
         $product = new product();
+
         $product->name = $request->input('name');
         $product->slug = Str::slug($request->input('name'));
 
@@ -71,22 +72,29 @@ class ProductController extends Controller
 
         }
 
-        $product->stock = $request->input('email');
-        $product->price = $request->input('email');
-        $product->sale = $request->input('email');
-        $product->is_hot = $request->input('email');
-        $product->views = $request->input('description');
-        $product->category_id = $request->input('type');
-        $product->brand_id = $request->input('type');
-        $product->vendor_id = $request->input('type');
-        $product->url = $request->input('type');
-        $product->sku = $request->input('type');
-        $product->color = $request->input('type');
-        $product->memory = $request->input('type');
-        $product->summary = $request->input('type');
-        $product->description = $request->input('type');
-        $product->meta_title = $request->input('type');
-        $product->meta_description = $request->input('type');
+        $product->stock = $request->input('stock');
+        $product->price = (int) str::remove(',', $request->input('price'));
+        $product->sale = (int) str::remove(',', $request->input('sale'));
+
+
+
+
+        $product->category_id = $request->input('category_id');
+        $product->brand_id = $request->input('brand_id');
+        $product->vendor_id = $request->input('vendor_id');
+        $product->url = $request->input('url');
+        $product->color = $request->input('color');
+        $product->summary = $request->input('summary');
+        $product->description = $request->input('description');
+        $product->meta_title = $request->input('meta_title');
+        $product->meta_description = $request->input('meta_description');
+
+
+        $is_hot = 0;
+        if($request->has('is_hot')){
+            $is_hot = $request->input('is_hot');
+        }
+        $product->is_hot = $is_hot;
 
 
         $position = 0;
@@ -126,13 +134,13 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::all();
-        $model = product::findOrFail($id);
+        $model = Product::findOrFail($id);
         $category = Category::all();
         $brand = Brands::all();
         $vendor = Vendor::all();
 
         // return view('backend.product.create',['category' => $category],['product' => $product],['brand' => $brand],['vendor' => $vendor] );
-        return view('backend.product.create')->with('model', $model)->with('category', $category)->with('product', $product)->with('vendor', $vendor)->with('brand', $brand);
+        return view('backend.product.edit')->with('model', $model)->with('category', $category)->with('product', $product)->with('vendor', $vendor)->with('brand', $brand);
 
 
     }
@@ -150,9 +158,9 @@ class ProductController extends Controller
 
 
         $product = product::findOrFail($id);
-        $product->title = $request->input('title');
-        $product->slug = Str::slug($request->input('title'));
-        $product->url = $request->input('url');
+        $product->name = $request->input('name');
+        $product->slug = Str::slug($request->input('name'));
+
 
         // @(app_path($product->image));
         $product->image = $request->input('image');
@@ -172,9 +180,27 @@ class ProductController extends Controller
 
         }
 
-        $product->target = $request->input('target');
-        $product->description = $request->input('editor1');
-        $product->type = $request->input('type');
+        $product->stock = $request->input('stock');
+        $product->price = (int) str::remove(',', $request->input('price'));
+        $product->sale = (int) str::remove(',', $request->input('sale'));
+
+
+        $product->category_id = $request->input('category_id');
+        $product->brand_id = $request->input('brand_id');
+        $product->vendor_id = $request->input('vendor_id');
+        $product->url = $request->input('url');
+        $product->color = $request->input('color');
+        $product->summary = $request->input('summary');
+        $product->description = $request->input('description');
+        $product->meta_title = $request->input('meta_title');
+        $product->meta_description = $request->input('meta_description');
+
+
+        $is_hot = 0;
+        if($request->has('is_hot')){
+            $is_hot = $request->input('is_hot');
+        }
+        $product->is_hot = $is_hot;
 
 
         $position = 0;
@@ -188,6 +214,7 @@ class ProductController extends Controller
             $is_active = $request->input('is_active');
         }
         $product->is_active = $is_active;
+
 
 
         $product->save();

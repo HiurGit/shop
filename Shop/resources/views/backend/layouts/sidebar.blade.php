@@ -69,7 +69,7 @@
             </li>
             <li class=" treeview">
                 <a href="#">
-                    <i class="fa fa-file-photo-o"></i>
+                    <i class="fa fa-bandcamp"></i>
                     <span>Quản lý PRODUCT</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -84,7 +84,7 @@
             </li>
             <li class=" treeview">
                 <a href="#">
-                    <i class="fa fa-th-large"></i>
+                    <i class="fa fa-linode"></i>
                     <span>Quản lý CATEGORY</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -110,7 +110,7 @@
             </li>
             <li class=" treeview">
                 <a href="#">
-                    <i class="fa fa-th-large"></i>
+                    <i class="fa fa-podcast"></i>
                     <span>Quản lý VENDOR</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
