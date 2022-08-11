@@ -35,42 +35,52 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="list-unstyled">
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <p class="login-box-msg">Sign in to start your session</p>
-
-    <form action="{{ asset('public/backend')}}/index2.html" method="post">
+    <form action="{{route('admin.postLogin') }}" method="post">
+      @csrf
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="email" name="email" id="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Remember Me
+              <input type="checkbox" name="remember" value="true"> Remember Me
             </label>
           </div>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
+
           <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
         </div>
         <!-- /.col -->
       </div>
+
     </form>
 
 
 
-    <div class="social-auth-links" >
 
-          <a class="btn btn-primary btn-block">Quên mật khẩu</a>
-    </div>
+          <a >Quên mật khẩu</a>
+
 
     <div >
-          <a class="btn btn-primary btn-block">Đăng kí tài khoản</a>
+          <a >Đăng kí tài khoản</a>
     </div>
 
 
