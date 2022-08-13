@@ -40,6 +40,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('product', ProductController::class);
     Route::resource('banner', BannerController::class);
     Route::resource('category', CategoryController::class);
+    Route::post('category/restore/{id}', [CategoryController::class,'restore'])->name('category.restore');
     Route::resource('brand', BrandController::class);
     Route::resource('vendor', VendorController::class);
     Route::resource('article', ArticleController::class);

@@ -18,15 +18,13 @@
                 <th>Số lượng</th>
                 <th>Giá</th>
                 <th>Giá sale</th>
-                <th>Liên kết</th>
+
                 <th>Color</th>
-                <th>Tóm tắt</th>
+
                 <th>Danh mục</th>
                 <th>Cung cấp</th>
                 <th>Nhãn hiệu</th>
                 <th>Mô tả</th>
-                <th>meta_title</th>
-                <th>meta_description</th>
                 <th>Vị trí</th>
                 <th>Is Hot</th>
                 <th>Trạng thái </th>
@@ -34,7 +32,7 @@
               </tr>
               </thead>
               <tbody>
-              @foreach ($data as $key => $item )]
+              @foreach ($data as $key => $item )
 
               <tr class="item-{{ $item->id }}">
                 <td>{{ $key + 1 }} </td>
@@ -50,15 +48,14 @@
                 <td>{{ $item->stock }}</td>
                 <td>{{ $item->price }}</td>
                 <td>{{ $item->sale }}</td>
-                <td>{{ $item->url }}</td>
+
                 <td>{{ $item->color }}</td>
-                <td>{{ $item->summary }}</td>
+
                 <td>{{ $item->category_id }}</td>
                 <td>{{ $item->vendor_id }}</td>
                 <td>{{ $item->brand_id }}</td>
                 <td >{{ $item->description }}</td>
-                <td>{{ $item->meta_title }}</td>
-                <td>{{ $item->meta_description }}</td>
+
                 <td>{{ $item->position }}</td>
 
                 <td>
@@ -109,15 +106,10 @@
 
 
 @section('js')
-    <script>
-        $(document).ready( function () {
-    $('#myTable').DataTable();
-} );
-    </script>
+
 
     <script type="text/javascript">
         $( document ).ready(function() {
-
 
             $('.deleteItem').click(function () {
                 var id = $(this).attr('data-id');
@@ -132,7 +124,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url : 'brand/'+id,
+                            url : 'product/'+id,
                             type: 'DELETE',
                             data: {},
                             success: function (res) {
@@ -147,5 +139,10 @@
                 });
             });
         });
-    </>
+    </script>
+    <script>
+        $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+    </script>
 @endsection

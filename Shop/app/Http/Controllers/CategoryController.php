@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 
 class CategoryController extends Controller
@@ -14,10 +16,27 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = category::all();
-        return view('backend.category.index', ['data' => $data]);
+        $params = $request->all();
+        $filter_type =   $params['filter_type'] ?? 2;
+        if (Auth::user()->role_id==2) {
+            if ($filter_type==1) {
+                $data = Category::withTrashed()->latest()->paginate(10);
+            }elseif ($filter_type==2) {
+                $data = Category::latest()->paginate(10);
+            }elseif ($filter_type==3) {
+                $data = Category::onlyTrashed()->latest()->paginate(10);
+            }
+        }else{
+            $data = Category::latest()->paginate(10);
+
+        }
+
+
+
+        return view('backend.category.index')->with('data', $data)->with('filter_type', $filter_type);
+
 
 
     }
@@ -45,14 +64,14 @@ class CategoryController extends Controller
 
         $request->validate([
             'name' => 'required|max:255',
-            'slug' => 'required|max:255',
+
             'position' => 'required|max:255',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000',
             //'target' => 'required',
             //'description' => 'required',
         ],[
             'name.required' => 'Bạn cần phải nhập vào tên',
-            'slug.required' => 'Bạn cần phải nhập vào Liên kết',
+
             'image.image' => 'File ảnh phải có dạng jpeg,png,jpg,gif,svg',
             'position.required' => 'Bạn cần phải nhập vị trí',
             //'target.required' => 'Bạn cần phải target',
@@ -182,8 +201,17 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $Category = Category::findOrFail($id);
 
-        $category = category::findOrFail($id);
+        $checkExitsProduct = Product::where('category_id',$id)->first();
+
+        if($checkExitsProduct != null){
+            return response()->json([
+                'status' => false,
+                'msg' => 'Xóa thất bại có tồn tại sản phẩm trong danh mục này!!!'
+            ]);
+        }
+
         // xóa ảnh cũ
         @unlink(public_path($category->image));
 
@@ -193,5 +221,18 @@ class CategoryController extends Controller
             'status' => true,
             'msg' => 'Xóa thành công'
         ]);
+    }
+    public function restore(Request $request, $id)
+    {
+
+        $category = category::withTrashed()->findOrFail($id);
+        $category->restore();
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Khôi phục thành công'
+        ]);
+
+        return view('backend.category.edit', ['model' => $model],['data' => $data]);
     }
 }
