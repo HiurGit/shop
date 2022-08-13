@@ -32,6 +32,9 @@ Route::get('/', function () {
 Route::get('/admin/login', [AdminController::class,'login'])->name('admin.login');
 Route::post('/admin/postLogin', [AdminController::class,'postLogin'])->name('admin.postLogin');
 Route::get('/admin/logout', [AdminController::class,'logout'])->name('admin.logout');
+Route::get('/admin/register', [AdminController::class,'show_signup_form'])->name('admin.register');
+Route::post('/admin/register', [AdminController::class,'process_signup'])->name('admin.registerPost');
+
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {

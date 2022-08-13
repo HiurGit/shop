@@ -45,12 +45,17 @@
     </div>
 @endif
     <p class="login-box-msg">Sign in to start your session</p>
-    <form action="{{route('admin.postLogin') }}" method="post">
+    <form action="{{route('admin.registerPost') }}" method="post">
       @csrf
+      <div class="form-group has-feedback">
+        <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
       <div class="form-group has-feedback">
         <input type="email" name="email" id="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
+
       <div class="form-group has-feedback">
         <input type="password" id="password" name="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
@@ -66,17 +71,21 @@
         <!-- /.col -->
         <div class="col-xs-4">
 
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign Up</button>
         </div>
         <!-- /.col -->
       </div>
 
     </form>
 
+
+
+
           <a >Quên mật khẩu</a>
 
+
     <div >
-          <a href="{{route('admin.register') }}" >Đăng kí tài khoản</a>
+          <a >Đăng kí tài khoản</a>
     </div>
 
 
