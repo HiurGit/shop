@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -52,6 +53,32 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('admin.login');
+    }
+
+    public function show_signup_form()
+    {
+        return view('backend.admin.register');
+
+    }
+    public function process_signup(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        $user = User::create([
+            'name' => trim($request->input('name')),
+            'email' => strtolower($request->input('email')),
+            'password' => bcrypt($request->input('password')),
+            'role_id' => '1',
+        ]);
+
+        session()->flash('message', 'Your account is created');
+
+        return redirect()->route('admin.login');
+
     }
 
 }

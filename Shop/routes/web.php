@@ -34,6 +34,9 @@ Route::get('/tin-tuc/{slug}', [HomeController::class,'detailTintuc'])->name('det
 Route::get('/admin/login', [AdminController::class,'login'])->name('admin.login');
 Route::post('/admin/postLogin', [AdminController::class,'postLogin'])->name('admin.postLogin');
 Route::get('/admin/logout', [AdminController::class,'logout'])->name('admin.logout');
+Route::get('/admin/register', [AdminController::class,'show_signup_form'])->name('admin.register');
+Route::post('/admin/register', [AdminController::class,'process_signup'])->name('admin.registerPost');
+
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {
@@ -42,6 +45,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('product', ProductController::class);
     Route::resource('banner', BannerController::class);
     Route::resource('category', CategoryController::class);
+    Route::post('category/restore/{id}', [CategoryController::class,'restore'])->name('category.restore');
     Route::resource('brand', BrandController::class);
     Route::resource('vendor', VendorController::class);
     Route::resource('article', ArticleController::class);

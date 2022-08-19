@@ -24,7 +24,10 @@
                 <th>Hành động</th>
               </tr>
               @foreach ($data as $key => $item )
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8a136dec9a8a4a9d1336cb649113d80f0f017b12
 
               <tr class="item-{{ $item->id }}">
                 <td>{{ $key + 1 }} </td>
