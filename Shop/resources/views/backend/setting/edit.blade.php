@@ -70,7 +70,10 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giới thiệu</label>
-                            <input required id="introduce" name="introduce" type="text" class="form-control" placeholder="" value="{{$model->introduce}}">
+                            <textarea id="introduce" name="introduce" class="form-control" rows="3" placeholder="Enter ..." >{{$model->introduce}}</textarea>
+
+
+
                         </div>
 
 
@@ -100,7 +103,7 @@
     <script type="text/javascript">
 
         $( document ).ready(function() {
-
+            CKEDITOR.replace( 'introduce' );
             $('.btnUpdate').click(function () {
                 if ($('#name').val() === '') {
                     $('#name').notify('Bạn nhập chưa nhập tiêu đề','error');

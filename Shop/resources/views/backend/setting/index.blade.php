@@ -15,6 +15,7 @@
                 <th>Hình ảnh</th>
                 <th>Công ty</th>
                 <th>Địa chỉ</th>
+                <th>Địa chỉ 2</th>
                 <th>Phone</th>
                 <th>Hotline</th>
                 <th>Tax</th>

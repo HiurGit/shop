@@ -42,17 +42,7 @@
                            <img src="  {{ asset('public/upload/404.jpg' )}}" width="200" height="150" alt="">
                            @endif
                         </div>
-                        <div class="form-group">
-                            <label>Danh mục cha</label>
-                            <select class="form-control" name="parent_id" id="parent_id">
-                                <option value="	_blank">Chọn</option>
-                                @foreach ($dataCate as $item )
-                                 <option {{ $item->id == $dataCateFail->parent_id ? 'selected': "" }} value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endforeach
 
-
-                            </select>
-                        </div>
                         <div class="form-group">
                             <label id="label-desc">Summary</label>
                             <textarea id="summary"  name="summary" class="form-control" rows="2" placeholder="Enter ...">{{ $model -> summary }}</textarea>
@@ -103,7 +93,7 @@
     <script type="text/javascript">
 
         $( document ).ready(function() {
-            CKEDITOR.replace( 'summary' );
+
             CKEDITOR.replace( 'description' );
             CKEDITOR.replace( 'meta_title' );
             CKEDITOR.replace( 'meta_description' );

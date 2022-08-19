@@ -51,17 +51,7 @@
                             <label for="exampleInputFile">Chọn ảnh</label>
                             <input type="file" name="image" id="image">
                         </div>
-                        <div class="form-group">
-                            <label>Danh mục cha</label>
-                            <select class="form-control" name="category_id" id="category_id">
-                                <option value="	_blank">Chọn</option>
-                                @foreach ($dataCate as $itemCate )
-                                 <option value="{{ $itemCate->id }}">{{ $itemCate->name }}</option>
-                                @endforeach
 
-
-                            </select>
-                        </div>
                         <div class="form-group">
                             <label id="label-desc">Summary</label>
                             <textarea id="summary"  name="summary" class="form-control" rows="2" placeholder="Enter ..."></textarea>
@@ -111,7 +101,7 @@
     <script type="text/javascript">
 
         $( document ).ready(function() {
-            CKEDITOR.replace( 'summary' );
+
             CKEDITOR.replace( 'description' );
             CKEDITOR.replace( 'meta_title' );
             CKEDITOR.replace( 'meta_description' );

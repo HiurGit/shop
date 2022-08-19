@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Article;
 use App\Models\Banner;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
@@ -67,7 +68,8 @@ class ArticleController extends Controller
 
         }
 
-        $article->category_id = $request->input('category_id');
+        $article->created_at = Carbon::now();
+
         $article->summary = $request->input('summary');
         $article->description = $request->input('description');
         $article->meta_title = $request->input('meta_title');
@@ -158,7 +160,7 @@ class ArticleController extends Controller
 
         }
 
-        $article->category_id = $request->input('category_id');
+        $article->updated_at = Carbon::now();
         $article->summary = $request->input('summary');
         $article->description = $request->input('description');
         $article->meta_title = $request->input('meta_title');
@@ -176,7 +178,7 @@ class ArticleController extends Controller
             $is_active = $request->input('is_active');
         }
         $article->is_active = $is_active;
-
+        
 
         $article->save();
         return redirect()->route('article.index');

@@ -3,8 +3,8 @@
             <div class="container">
                 <div class="top-bar left">
                     <ul class="horizontal-menu">
-                        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>Organic@company.com</a></li>
-                        <li><a href="#">Free Shipping for all Order of $99</a></li>
+                        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>{{$setting->email}}</a></li>
+
                     </ul>
                 </div>
                 <div class="top-bar right">
@@ -39,7 +39,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-2 col-md-6 col-xs-6">
-                        <a href="index-2.html" class="biolife-logo"><img src="{{ asset('public/frontend')}}/assets/images/organic-3.png" alt="biolife logo" width="135" height="34"></a>
+                        <a href="{{ route('/') }}" class="biolife-logo"><img src="{{$setting->image}}" alt="biolife logo" width="135" height="34"></a>
                     </div>
                     <div class="col-lg-6 col-md-7 hidden-sm hidden-xs">
                         <div class="primary-menu">
@@ -132,7 +132,7 @@
                                 </ul>
                             </li>
                             <li class="menu-item menu-item-has-children has-megamenu">
-                                <a href="#" class="menu-name" data-title="Demo">Demo</a>
+                                <a href="{{ route('tintuc') }}" class="menu-name" data-title="Demo">Tin Tuc</a>
                                 <div class="wrap-megamenu lg-width-800 md-width-750">
                                     <div class="mega-content">
                                         <div class="col-lg-3 col-md-3 col-xs-12 md-margin-bottom-0 xs-margin-bottom-25">
@@ -158,7 +158,7 @@
                                                     <li class="menu-item" ><a class="menu-name" href="blog-v02.html">Blog Style 02</a></li>
                                                     <li class="menu-item" ><a class="menu-name" href="blog-v03.html">Blog Style 03</a></li>
                                                     <li class="menu-item" ><a class="menu-name" href="contact.html">Contact Us</a></li>
-                                                    <li class="menu-item" ><a class="menu-name" href="about-us.html">About Us</a></li>
+                                                    <li class="menu-item" ><a class="menu-name" href="">Giới thiệu</a></li>
                                                     <li class="menu-item" ><a class="menu-name" href="checkout.html">Checkout</a></li>
                                                     <li class="menu-item" ><a class="menu-name" href="shopping-cart.html">Shopping Cart</a></li>
                                                     <li class="menu-item" ><a class="menu-name" href="login.html">Login/Register</a></li>
@@ -197,7 +197,7 @@
                                 </div>
                             </li>
                             <li class="menu-item menu-item-has-children has-megamenu">
-                                <a href="#" class="menu-name" data-title="Blog">Blog</a>
+                                <a href="{{ route('intro') }}" class="menu-name" data-title="Blog">Thông Tin</a>
                                 <div class="wrap-megamenu lg-width-800 md-width-750">
                                     <div class="mega-content">
                                         <div class="col-lg-3 col-md-3 col-xs-6">
@@ -737,8 +737,8 @@
                             </form>
                         </div>
                         <div class="live-info">
-                            <p class="telephone"><i class="fa fa-phone" aria-hidden="true"></i><b class="phone-number">(+900) 123 456 7891</b></p>
-                            <p class="working-time">Mon-Fri: 8:30am-7:30pm; Sat-Sun: 9:30am-4:30pm</p>
+                            <p class="telephone"><i class="fa fa-phone" aria-hidden="true"></i><b class="phone-number">{{$setting->phone}}</b></p>
+                            <p class="working-time">{{$setting->company}} <br> {{$setting->address}}</p>
                         </div>
                     </div>
                 </div>

@@ -4,12 +4,18 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-9">
                         <section class="footer-item">
-                            <a href="index-2.html" class="logo footer-logo"><img src="{{ asset('public/frontend')}}/assets/images/organic-3.png" alt="biolife logo" width="135" height="34"></a>
+                            <a href="#" class="logo footer-logo">
+                            @if ( file_exists($setting->image))
+                                <img src="  {{ asset($setting->image )}}" width="100" height="70" alt="">
+                                @else
+                                <img src="  {{ asset('public/upload/404.jpg' )}}" width="200" height="150" alt="">
+                                @endif
+                            </a>
                             <div class="footer-phone-info">
                                 <i class="biolife-icon icon-head-phone"></i>
                                 <p class="r-info">
-                                    <span>Got Questions ?</span>
-                                    <span>(700)  9001-1909  (900) 689 -66</span>
+                                    <span>Hotline {{$setting->company}} ?</span>
+                                    <span>{{$setting->phone}}</span>
                                 </p>
                             </div>
                             <div class="newsletter-block layout-01">
@@ -30,7 +36,7 @@
                                 <div class="col-lg-6 col-sm-6 col-xs-6">
                                     <div class="wrap-custom-menu vertical-menu-2">
                                         <ul class="menu">
-                                            <li><a href="#">About Us</a></li>
+                                            <li><a href="{{ route('intro') }}">Giới thiêu</a></li>
                                             <li><a href="#">About Our Shop</a></li>
                                             <li><a href="#">Secure Shopping</a></li>
                                             <li><a href="#">Delivery infomation</a></li>
@@ -56,33 +62,34 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
                         <section class="footer-item">
-                            <h3 class="section-title">Transport Offices</h3>
+                            <h3 class="section-title">Thông tin công ty</h3>
                             <div class="contact-info-block footer-layout xs-padding-top-10px">
                                 <ul class="contact-lines">
+                                <li>
+                                        <p class="info-item">
+                                            <i class="biolife-icon icon-book"></i>
+                                            <b class="desc"> {{$setting->company}}</b>
+                                        </p>
+                                    </li>
                                     <li>
                                         <p class="info-item">
                                             <i class="biolife-icon icon-location"></i>
-                                            <b class="desc">7563 St. Vicent Place, Glasgow, Greater Newyork NH7689, UK </b>
+                                            <b class="desc">{{$setting->address}} </b>
                                         </p>
                                     </li>
                                     <li>
                                         <p class="info-item">
                                             <i class="biolife-icon icon-phone"></i>
-                                            <b class="desc">Phone: (+067) 234 789  (+068) 222 888</b>
+                                            <b class="desc">Phone: {{$setting->phone}}</b>
                                         </p>
                                     </li>
                                     <li>
                                         <p class="info-item">
                                             <i class="biolife-icon icon-letter"></i>
-                                            <b class="desc">Email:  contact@company.com</b>
+                                            <b class="desc">Email:  {{$setting->email}}</b>
                                         </p>
                                     </li>
-                                    <li>
-                                        <p class="info-item">
-                                            <i class="biolife-icon icon-clock"></i>
-                                            <b class="desc">Hours: 7 Days a week from 10:00 am</b>
-                                        </p>
-                                    </li>
+
                                 </ul>
                             </div>
                             <div class="biolife-social inline">

@@ -23,7 +23,8 @@
 
                 <th>Hành động</th>
               </tr>
-              @foreach ($data as $key => $item )]
+              @foreach ($data as $key => $item )
+
 
               <tr class="item-{{ $item->id }}">
                 <td>{{ $key + 1 }} </td>
@@ -41,7 +42,8 @@
                 <td>{{ $item->title }}</td>
                 <td>{!! html_entity_decode($item->summary  ) !!} </td>
 
-                <td>   {!! html_entity_decode($item->description) !!}</td>
+
+                <td>   {!! Str::limit($item->description,200)  !!}</td>
 
             <td>{{ $item->position }}</td>
             <td>{{ $item->category_id }}</td>
