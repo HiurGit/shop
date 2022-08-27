@@ -31,8 +31,9 @@ Route::get('/', [HomeController::class,'index'])->name('/');
 Route::get('/gioi-thieu', [HomeController::class,'intro'])->name('intro');
 Route::get('/tin-tuc', [HomeController::class,'tintuc'])->name('tintuc');
 Route::get('/tin-tuc/{slug}', [HomeController::class,'detailTintuc'])->name('detail-Tintuc');
-Route::get('/danh-muc/{slug}', [HomeController::class,'category'])->name('category');
+Route::get('/danh-muc/{slug}', [HomeController::class,'category_product'])->name('category-product');
 Route::get('/san-pham', [HomeController::class,'products'])->name('products');
+Route::get('/san-pham/{slug}', [HomeController::class,'detailSanpham'])->name('detail-Sanpham');
 
 
 

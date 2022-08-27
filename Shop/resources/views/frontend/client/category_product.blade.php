@@ -4,7 +4,7 @@
 <div id="main-content" class="main-content">
 
 <div class="hero-section hero-background">
-        <h1 class="page-title">Sản phảm</h1>
+        <h1 class="page-title">{{ Str::upper($categorys->name) }}</h1>
     </div>
 
     <!--Navigation section-->
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="info">
                                         <b class="categories">{{$item->cate}}</b>
-                                        <h4 class="product-title"><a href="#" class="pr-name">{{ Str::limit($item->name, 15)}}</a></h4>
+                                        <h4 class="product-title"><a href="{{route('detail-Sanpham',['slug'=>$item->slug])}}" class="pr-name">{{ Str::limit($item->name, 15)}}</a></h4>
                                         <div class="price">
                                             <ins><span class="price-amount"><span class="currencySymbol"></span>{{ number_format($item->sale, 0) }} đ</span></ins>
                                             <del><span class="price-amount"><span class="currencySymbol"></span>{{ number_format($item->price, 0) }}</span></del>
@@ -50,7 +50,6 @@
                                 </div>
                             </li>
                             @endforeach
-
                         </ul>
                     </div>
 

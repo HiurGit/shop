@@ -317,7 +317,7 @@
                                 @foreach ($category as $item)
                                     @if ($item->parent_id == 0  )
                                         <li class="menu-item menu-item-has-children has-megamenu">
-                                            <a href="#" class="menu-name" data-title="Fruit & Nut Gifts"><i
+                                            <a href=" {{route('category-product',['slug'=>$item->slug])}}" class="menu-name" data-title="Fruit & Nut Gifts"><i
                                                     class="biolife-icon icon-fruits"></i>{{$item->name}}</a>
 
                                         </li>
