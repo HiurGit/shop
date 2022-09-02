@@ -25,12 +25,12 @@
                         <li class="post-elem col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <div class="post-item effect-04 style-bottom-info">
                                 <div class="thumbnail">
-                                    <a href="#" class="link-to-post"><img src="{{$item->image}}" width="370" height="270" alt=""></a>
+                                    <a href="#" class="link-to-post"><img src="{{asset($item->image)}}" width="370" height="270" alt=""></a>
                                 </div>
                                 <div class="post-content">
                                     <h4 class="post-name"><a href="{{route('detail-Tintuc',['slug'=>$item->slug])}}" class="linktopost">{{$item->title}}</a></h4>
                                     <p class="post-archive"><b class="post-cat"></b><span class="post-date"> {{date('d/m/Y',strtotime($item->created_at))}}</span><span class="author">Posted By: Braum J.Teran</span></p>
-                                    <p class="excerpt">{{ $item->summary }}</p>
+                                    <p class="excerpt">{{ Str::limit($item->summary, 50)}}</p>
 
                                     <div class="group-buttons">
                                     <a href="{{route('detail-Tintuc',['slug'=>$item->slug])}}" class="btn readmore">Xem thêm</a>

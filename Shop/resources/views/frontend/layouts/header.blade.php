@@ -47,11 +47,8 @@
                     <div class="primary-menu">
                         <ul class="menu biolife-menu clone-main-menu clone-primary-menu" id="primary-menu"
                             data-menuname="main menu">
-                            <li class="menu-item"><a href="index-2.html">Home</a></li>
-                            <li class="menu-item">
-                                <a href="#" class="menu-name" data-title="Shop">Shop</a>
+                            <li class="menu-item"><a href="{{ route('/') }}">Home</a></li>
 
-                            </li>
                             <li class="menu-item ">
                                 <a href="{{ route('products') }}" class="menu-name" data-title="Products">San pham</a>
 

@@ -37,6 +37,7 @@ Route::get('/san-pham/{slug}', [HomeController::class,'detailSanpham'])->name('d
 
 
 
+
 ;
 Route::get('/admin/login', [AdminController::class,'login'])->name('admin.login');
 Route::post('/admin/postLogin', [AdminController::class,'postLogin'])->name('admin.postLogin');
