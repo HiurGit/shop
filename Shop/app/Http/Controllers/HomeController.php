@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Banner;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
@@ -139,9 +141,40 @@ class HomeController extends Controller
 
         return view('frontend.client.detail_product')->with('detail_product', $detail_product);
     }
-    public function shop()
+    public function search(Request $request)
     {
 
-        return view('frontend.client.shop');
+        $keyword = $request->input('kwd');
+
+        $slug = Str::slug($keyword);
+
+        $sql = "SELECT * FROM products WHERE is_active = 1 AND slug like '%$keyword%'";
+
+        $products = Product::where([
+            ['slug', 'like', '%' . $slug . '%'],
+            ['is_active', '=', 1]
+        ])->orderByDesc('id')->paginate(2);
+
+        $totalResult = $products->total(); // số lượng kết quả tìm kiếm
+
+        // $page = $request->input('page', 1);
+        // $paginate = 5;
+
+        // $products = Product::searchByQuery(['match' => ['name' => $keyword]], null, null, $paginate, $page);
+        // $totalResult = $products->totalHits();
+        // $totalResult = $totalResult['value'];
+        // // $offSet = ($page * $paginate) - $paginate;
+        // $itemsForCurrentPage = $products->toArray();
+        // $products = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, $totalResult, $paginate, $page);
+        // $products->setPath('tim-kiem');
+
+        return view('frontend.client.search', [
+            'products' => $products,
+            'totalResult' => $totalResult ?? 0,
+            'keyword' => $keyword ? $keyword : ''
+        ]);
+    }
+    public function test(){
+        return view('frontend.client.search');
     }
 }

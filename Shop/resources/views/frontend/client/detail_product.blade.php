@@ -79,17 +79,23 @@
                         <div class="quantity-box">
                             <span class="title">Quantity:</span>
                             <div class="qty-input">
-                                <input type="text" name="qty12554" value="1" data-max_value="20" data-min_value="1" data-step="1">
-                                <a href="#" class="qty-btn btn-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
-                                <a href="#" class="qty-btn btn-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                <input id="quantity" type="number" name="quantity" value="1" max="20" min="1" step="1">
+
                             </div>
                         </div>
-                        <div class="total-price-contain">
-                            <span class="title">Total Price:</span>
-                            <p class="price">£199.99</p>
-                        </div>
+
                         <div class="buttons">
-                            <a href="#" class="btn add-to-cart-btn">add to cart</a>
+
+                                <input type="hidden" value="{{ $detail_product->id }}" name="id">
+                                <input type="hidden" value="{{ $detail_product->name }}" name="name">
+                                <input type="hidden" value="{{ $detail_product->sale }}" name="sale">
+                                <input type="hidden" value="{{ $detail_product->image }}"  name="image">
+
+                                <button class="btn add-to-cart-btn">Add To Cart</button>
+                            </form>
+
                             <p class="pull-row">
                                 <a href="#" class="btn wishlist-btn">wishlist</a>
                                 <a href="#" class="btn compare-btn">compare</a>

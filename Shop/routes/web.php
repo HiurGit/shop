@@ -10,6 +10,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\CartController;
+
 
 
 
@@ -35,10 +37,17 @@ Route::get('/danh-muc/{slug}', [HomeController::class,'category_product'])->name
 Route::get('/san-pham', [HomeController::class,'products'])->name('products');
 Route::get('/san-pham/{slug}', [HomeController::class,'detailSanpham'])->name('detail-Sanpham');
 
+Route::get('/tim-kiem', [HomeController::class,'search'])->name('search');
+Route::get('/test', [HomeController::class,'test'])->name('test');
 
 
+Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
+Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
+Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
+Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
-;
+
 Route::get('/admin/login', [AdminController::class,'login'])->name('admin.login');
 Route::post('/admin/postLogin', [AdminController::class,'postLogin'])->name('admin.postLogin');
 Route::get('/admin/logout', [AdminController::class,'logout'])->name('admin.logout');
