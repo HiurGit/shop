@@ -145,7 +145,7 @@
                             <li class="product-item">
                                 <div class="contain-product layout-default">
                                     <div class="product-thumb">
-                                        <a href="#" class="link-to-product">
+                                        <a href="{{route('detail-Sanpham',['slug'=>$product->slug])}}" class="link-to-product">
 
                                             @if ( file_exists($product->image))
                                             <img src=" {{asset($product->image)}}" alt="dd" width="270" height="270" class="product-thumnail">
@@ -157,7 +157,7 @@
                                     </div>
                                     <div class="info">
                                         <b class="categories">Vegetables</b>
-                                        <h4 class="product-title"><a href="#" class="pr-name">{{ $product->name }}</a></h4>
+                                        <h4 class="product-title"><a href="{{route('detail-Sanpham',['slug'=>$product->slug])}}" class="pr-name">{{ $product->name }}</a></h4>
                                         <div class="price ">
                                             <ins><span class="price-amount"><span class="currencySymbol"></span>{{ number_format($product->sale, 0) }} đ</span></ins>
                                             <del><span class="price-amount"><span class="currencySymbol"></span>{{ number_format($product->price, 0) }}</span></del>
@@ -166,7 +166,20 @@
                                             <p class="message">All products are carefully selected to ensure food safety.</p>
                                             <div class="buttons">
                                                 <a href="#" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                                <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+                                                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+
+                                                <input type="hidden" value="{{ $product->id }}" name="id">
+                                                <input type="hidden" value="{{ $product->name }}" name="name">
+                                                <input type="hidden" value="{{ $product->sale }}" name="sale">
+                                                <input type="hidden" value="{{ $product->image }}"  name="image">
+                                                <input type="hidden" name="quantity" value="1">
+
+
+
+                                                <button class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>
+                                            </form>
+
                                                 <a href="#" class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
                                             </div>
                                         </div>
@@ -262,9 +275,20 @@
                                         <b class="text1">{{ $item->name }}</b>
                                         <b class="text-pr"><span>Only:</span>{{ number_format($product->sale, 0) }}</b>
 
+                                        <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+
+                                        <input type="hidden" value="{{ $product->id }}" name="id">
+                                        <input type="hidden" value="{{ $product->name }}" name="name">
+                                        <input type="hidden" value="{{ $product->sale }}" name="sale">
+                                        <input type="hidden" value="{{ $product->image }}"  name="image">
+                                        <input type="hidden" name="quantity" value="1">
 
 
-                                        <a href="#" class="btn btn-shopnow">shop now</a>
+
+                                        <button href="#" class="btn btn-shopnow">shop now</button>                                    </form>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -286,7 +310,7 @@
                         <li class="product-item">
                             <div class="contain-product layout-default">
                                 <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
+                                    <a href="{{route('detail-Sanpham',['slug'=>$product->slug])}}" class="link-to-product">
 
                                         @if ( file_exists($item->image))
                                         <img src=" {{asset($item->image)}}" alt="dd" width="270" height="270" class="product-thumnail">
@@ -298,7 +322,7 @@
                                 </div>
                                 <div class="info">
                                     <b class="categories">Vegetables</b>
-                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                    <h4 class="product-title"><a href="{{route('detail-Sanpham',['slug'=>$product->slug])}}" class="pr-name">{{$product->name }}</a></h4>
                                     <div class="price ">
                                         <ins><span class="price-amount"><span class="currencySymbol"></span>{{ number_format($product->sale, 0) }} đ</span></ins>
                                         <del><span class="price-amount"><span class="currencySymbol"></span>{{ number_format($product->price, 0) }}</span></del>
@@ -308,7 +332,19 @@
                                         <p class="message">All products are carefully selected to ensure food safety.</p>
                                         <div class="buttons">
                                             <a href="#" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+                                            <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+
+                                            <input type="hidden" value="{{ $product->id }}" name="id">
+                                            <input type="hidden" value="{{ $product->name }}" name="name">
+                                            <input type="hidden" value="{{ $product->sale }}" name="sale">
+                                            <input type="hidden" value="{{ $product->image }}"  name="image">
+                                            <input type="hidden" name="quantity" value="1">
+
+
+
+                                            <button class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>
+                                        </form>
                                             <a href="#" class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
                                         </div>
                                     </div>

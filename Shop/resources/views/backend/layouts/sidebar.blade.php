@@ -110,6 +110,19 @@
             </li>
             <li class=" treeview">
                 <a href="#">
+                    <i class="fa fa-compress "></i>
+                    <span>Quản lý CONTACT</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('contact.create') }}"><i class="fa fa-plus-square"></i> Tạo Contact</a></li>
+                    <li><a href="{{ route('contact.index') }}"><i class="fa fa-list"></i> Danh sách Contact</a></li>
+                </ul>
+            </li>
+            <li class=" treeview">
+                <a href="#">
                     <i class="fa fa-podcast"></i>
                     <span>Quản lý VENDOR</span>
                     <span class="pull-right-container">

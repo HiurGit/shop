@@ -11,6 +11,8 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ContactController;
+
 
 
 
@@ -36,6 +38,10 @@ Route::get('/tin-tuc/{slug}', [HomeController::class,'detailTintuc'])->name('det
 Route::get('/danh-muc/{slug}', [HomeController::class,'category_product'])->name('category-product');
 Route::get('/san-pham', [HomeController::class,'products'])->name('products');
 Route::get('/san-pham/{slug}', [HomeController::class,'detailSanpham'])->name('detail-Sanpham');
+
+Route::get('/lien-he', [HomeController::class, 'contact'])->name('contact');
+Route::post('/lien-he', [HomeController::class, 'contactPost'])->name('contactPost');
+
 
 Route::get('/tim-kiem', [HomeController::class,'search'])->name('search');
 Route::get('/test', [HomeController::class,'test'])->name('test');
@@ -68,6 +74,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('article', ArticleController::class);
     Route::resource('setting', SettingController::class);
     Route::resource('users', UsersController::class);
+    Route::resource('contact', ContactController::class);
 
 
 });

@@ -61,7 +61,7 @@
                                 <a href="{{ route('intro') }}" class="menu-name" data-title="Blog">Thông Tin</a>
 
                             </li>
-                            <li class="menu-item"><a href="contact.html">Contact</a></li>
+                            <li class="menu-item"><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
                     </div>
                 </div>

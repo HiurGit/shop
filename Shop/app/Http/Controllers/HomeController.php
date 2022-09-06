@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Banner;
+use App\Models\Contacts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -174,6 +175,26 @@ class HomeController extends Controller
             'keyword' => $keyword ? $keyword : ''
         ]);
     }
+    public function contact()
+    {
+        return view('frontend.client.contact');
+    }
+    public function contactPost(Request $request)
+    {
+
+        $contact = new Contacts();
+        $contact->name = $request->input('name');
+        $contact->phone = $request->input('phone');
+        $contact->email = $request->input('email');
+        $contact->content = $request->input('content');
+
+
+
+        $contact->save();
+        return redirect()->route('contact');
+
+    }
+
     public function test(){
         return view('frontend.client.search');
     }
